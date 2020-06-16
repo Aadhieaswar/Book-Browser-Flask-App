@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Books!Boooks!Books!
+
+{% endblock %}
+
+{% block body %}
+
+<h1 class="head"> Login to Books!Books!Books! </h1>
+
+<h4 class="head"> The Best Online Book Review Website</h4>
+
+<div class="container my-4">
+
+<div class="align-items-center justify-content-center">
+
+<form action="{{ url_for('login') }}" method="post">
+  <div class="form-group">
+
+  <h4 class="mar">Username:</h4>
+        <input type="text" id="sub1" class="form-control" name="username" placeholder="Username">
+  </div>
+
+  <div class="form-group">
+    <h4 class="mar">Password: </h4>
+        <input type="password" id="sub1" class="form-control" name="password" placeholder="Password">
+  </div>
+
+  <div class="form-group">
+        <button type="submit" id="sub" class="btn btn-primary btn-lg">Submit</button>
+  </div>
+</form>
+
+</div>
+</div>
+
+{% endblock %}

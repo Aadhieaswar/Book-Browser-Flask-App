@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Search Results!
+
+{% endblock %}
+
+{% block body %}
+
+<h1 class="head"> Success! We have found some results!</h1>
+
+<h4 class="head"> {{ nam3 }}! Choose the book you wish to write a review for: </h4>
+
+<div class="order">
+{% for result in results %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ result.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">By {{ result.author }}</h6>
+    <p class="card-text">Published: {{ result.year }}</p>
+    <p class="card-text">ISBN: {{ result.isbn }}</p>
+    <a href="{{ url_for('review', book_id = result.id, username = nam3) }}" class="btn btn-primary">Write Review</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+<p class="space"></p>
+
+<div class="bottom-right">
+<form action="{{ url_for('logout') }}">
+<button type="submit" class="btn btn-primary">Log Out</button>
+</form>
+<form class="bottom-left" action="{{ url_for('returns', username = nam3) }}">
+  <button type="submit" class="btn btn-primary">Back to Search</button>
+</form>
+</div>
+
+{% endblock %}

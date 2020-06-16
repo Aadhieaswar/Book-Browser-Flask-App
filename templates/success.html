@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Success!
+
+{% endblock %}
+
+{% block body %}
+
+<h1 class="head"> Success! User {{ nam2 }}</h1>
+
+<h3 class="head"> You Have Logged into Books!Books!Books</h3>
+
+<h4 class="head"> The Best Online Book Review Website</h4>
+
+<div class="container my-4">
+
+<div class="align-items-center justify-content-center">
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form action="{{ url_for('search', username = nam2) }}" method="post">
+      <h4 class="head">Enter key words to search for books(Author, Title, ISBN or Year published):</h4>
+      <input class="form-control" autocomplete="off" type="text" name="key" placeholder="Search">
+      <p></p>
+      <button class="btn btn-primary btn-lg btn-block">Search for Books</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<div>
+<form class="bottom-right" action="{{ url_for('logout') }}">
+<button type="submit" class="btn btn-primary">Log Out</button>
+</form>
+</div>
+
+{% endblock %}

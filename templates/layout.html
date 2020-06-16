@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="icon" href="https://docs.google.com/drawings/d/e/2PACX-1vSXIjQO6hu1Uj01NZHYDIaVVQTrKuka1LBiH6A6I-wWpxxB5KLGFSa_IdmCDz7KA_csRC2CRVFFY-uG/pub?w=1440&h=1080" type="image/icon type"></link>
+<style media="screen">
+
+  div {
+    margin: 0px 5% 0px 5%;
+  }
+
+  .head {
+    text-align: center;
+  }
+
+  #sub {
+    width: 20%;
+    margin: 10px 40% 10px 40%;
+  }
+
+  #sub1 {
+    width: 50%;
+    margin: 10px 25% 10px 25%;
+  }
+
+  .mar {
+    margin: 10px 25% 10px 25%;
+  }
+
+  .inp {
+    margin: 0 -10% 0 -10%
+  }
+
+  .bul {
+    margin: 0px;
+    border-color: white;
+  }
+
+  body {
+    background-image: url(https://docs.google.com/drawings/d/e/2PACX-1vQsTeFym8H6EjEwq9CvhjCE437rthueQpuIl-nT8Dwn3FBm8f5VNvhNg-Pdb_YCyNw0GtnNGQN6e0lC/pub?w=1440&h=1080);
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+  }
+
+  .card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+        background-color: #dadce0;
+  }
+
+  .star0::after {
+    content: "\2729 \2729 \2729 \2729 \2729";
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .star1::after {
+    content: "\2605 \2729 \2729 \2729 \2729";
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .star2::after {
+    content: "\2605 \2605 \2729 \2729 \2729";
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .star3::after {
+    content: "\2605 \2605 \2605 \2729 \2729 ";
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .star4::after {
+    content: "\2605 \2605 \2605 \2605 \2729 ";
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .star5::after {
+    content: "\2605 \2605 \2605 \2605 \2605";
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .size {
+    font-size: 30px;
+  }
+
+  @media screen and (max-width: 775px) {
+    #sub {
+      width: 50%;
+      margin: 10px 25% 10px 25%;
+    }
+
+    .size {
+      display: none;
+    }
+
+    .star0::after {
+      content: "0 \2605";
+      font-size: 30px;
+      padding-right: 0px;
+    }
+
+    .star1::after {
+      content: "1 \2605";
+      font-size: 30px;
+      padding-right: 0px;
+    }
+
+    .star2::after {
+      content: "2 \2605";
+      font-size: 30px;
+      padding-right: 0px;
+    }
+
+    .star3::after {
+      content: "3 \2605";
+      font-size: 30px;
+      padding-right: 0px;
+    }
+
+    .star4::after {
+      content: "4 \2605";
+      font-size: 30px;
+      padding-right: 0px;
+    }
+
+    .star5::after {
+      content: "5 \2605";
+      font-size: 30px;
+      padding-right: 0px;
+    }
+  }
+
+
+  .bottom-right {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    margin-bottom: 2%;
+    margin-right: 2.5%;
+  }
+
+  .bottom-left {
+    margin: 0;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 2%;
+    margin-left: 2.5%;
+    position: fixed;
+  }
+
+  .order {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  .order > div {
+    margin: 20px;
+    background-color: #bcf5f1;
+  }
+
+  .order > div:hover {
+    background-color: #53b9ed;
+  }
+
+  .space {
+    margin-bottom: 5%;
+  }
+
+
+</style>
+
+  </head>
+  <body>
+
+    {% block body %}
+
+    {% endblock %}
+
+  </body>
+</html>

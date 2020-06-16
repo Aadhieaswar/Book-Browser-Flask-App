@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Books!Boooks!Books!
+
+{% endblock %}
+
+{% block body %}
+
+<script>
+
+  alert("You have entered Books!Books!Books!");
+
+</script>
+
+<h1 class="head"> Welcome to Books!Books!Books! </h1>
+
+<h4 class="head"> The Best Online Book Review Website</h4>
+
+
+      <form action="{{ url_for('log') }}">
+      <button class="btn btn-primary btn-lg" id="sub" type="submit">Log In</button>
+      </form>
+<p> </p>
+      <form action="{{ url_for('sign') }}">
+      <button class="btn btn-primary btn-lg" id="sub" type="submit">Sign Up</button>
+      </form>
+
+
+{% endblock %}

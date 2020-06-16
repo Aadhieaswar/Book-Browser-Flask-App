@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Review Area!
+
+{% endblock %}
+
+{% block body %}
+
+<h3 class="head">Hello {{ nam3 }} !</h3>
+
+<h4 class="head"> Exprees your thoughts for the book {{ result.title }} by {{ result.author }}! </h4>
+
+<h4 class="head">GoodReads Rating: </h4>
+
+<p class="head">
+Average rating of {{ num }} out of {{ numb }} reviews
+</p>
+
+<div class="head">
+  <h4>Your Review for the Book:</h4>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+  <h6 class="card-text"> {{ revs.review }} </h6>
+  </div>
+  </div>
+</div>
+<div class="head">
+  <h4>Your Rating for the Book:</h4>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h6 class="card-text"> {{ revs.rating }} </h6>
+    </div>
+    </div>
+</div>
+
+<form action="{{ url_for('review', book_id = result.id, username = nam3) }}" method="post" id="form1">
+
+
+<div class="form-group">
+    <h4>Rate the Book:</h4>
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <div class="btn btn-info bul">
+  <input type="radio" id="option1" name="star" value="0">
+  <div class="size">
+    0
+  </div><div style="font-size: 20px" class="star0"></div>
+</div>
+
+<div class="btn btn-info bul">
+  <input type="radio"id="option2"  name="star" value="1">
+    <div class="size">
+      1
+    </div><div style="font-size: 20px" class="star1"></div>
+</div>
+
+<div class="btn btn-info bul">
+  <input type="radio" id="option3" name="star" value="2">
+  <div class="size">
+    2
+  </div><div style="font-size: 20px" class="star2"></div>
+</div>
+
+<div class="btn btn-info bul">
+  <input type="radio" id="option4" name="star" value="3">
+  <div class="size">
+    3
+  </div><div style="font-size: 20px" class="star3"></div>
+</div>
+
+<div class="btn btn-info bul">
+  <input type="radio" id="option5" name="star" value="4">
+  <div class="size">
+    4
+  </div><div style="font-size: 20px" class="star4"></div>
+</div>
+
+<div class="btn btn-info bul">
+<input type="radio" id="option6" name="star" value="5">
+<div class="size">
+  5
+</div><div style="font-size: 20px" class="star5"></div>
+</div>
+</div>
+</div>
+
+  <div>
+  <h4>Enter Review:</h4>
+  </div>
+    <div class="form-group">
+
+      <textarea form="form1" class="form-control" name="review" rows="8" cols="80" placeholder="Enter Your Review Here"></textarea>
+
+    </div>
+    <div class="form-group space">
+
+        <button type="{{ btn }}" class="btn btn-primary {{ dev }}">Add Review</button>
+        <p>
+        {{ msg }}
+        </p>
+
+    </div>
+
+</form>
+
+<div>
+<form class="bottom-right" action="{{ url_for('logout') }}">
+<button type="submit" class="btn btn-primary">Log Out</button>
+</form>
+<form class="bottom-left" action="{{ url_for('returns', username = nam3) }}">
+  <button type="submit" class="btn btn-primary">Back to Search</button>
+</form>
+</div>
+
+{% endblock %}
