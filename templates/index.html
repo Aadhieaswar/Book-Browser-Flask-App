@@ -8,12 +8,6 @@ Books!Boooks!Books!
 
 {% block body %}
 
-<script>
-
-  alert("You have entered Books!Books!Books!");
-
-</script>
-
 <h1 class="head"> Welcome to Books!Books!Books! </h1>
 
 <h4 class="head"> The Best Online Book Review Website</h4>
@@ -25,6 +19,9 @@ Books!Boooks!Books!
 <p> </p>
       <form action="{{ url_for('sign') }}">
       <button class="btn btn-primary btn-lg" id="sub" type="submit">Sign Up</button>
+      {% if message %}
+      <div> {{ message }} </div>
+      {% endif %}
       </form>
 
 

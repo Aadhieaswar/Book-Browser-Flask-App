@@ -8,9 +8,16 @@ import requests, json
 
 app = Flask(__name__)
 
+FLASK_DEBUG = True
+
+FLASK_APP = 'applicset DATA_BASEation.py'
+
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
+
+app.config["SECRET_KEY"] = "my secret key" #os.getenv("SECRET_KEY")
+
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -34,7 +41,8 @@ def log():
 
 @app.route("/logout")
 def logout():
-    return render_template("logout.html")
+    session.clear()
+    return render_template("index.html")
 
 @app.route("/login/completelogin", methods=["POST", "GET"])
 def login():
@@ -45,6 +53,7 @@ def login():
     if db.execute("SELECT * FROM users WHERE username = :username AND password = :password", {"username": username, "password": password}).rowcount == 0:
         return render_template("error.html", message="please check your password and/or username")
     elif db.execute("SELECT * FROM users WHERE username = :username AND password = :password", {"username": username, "password": password}).rowcount == 1:
+        session["user"] = username
         return render_template("success.html", nam2 = username)
 
 @app.route("/signup/completesignup", methods=["POST", "GET"])
@@ -54,18 +63,22 @@ def signup():
     password = request.form.get("password")
 
     if db.execute("SELECT * FROM users WHERE username = :username", {"username": username}).rowcount == 1:
-        return render_template("error.html", message="Please enter a different username")
+        return render_template("index.html", message="Please enter a different username")
+    elif (username == '' or password == ''):
+        return render_template("index.html", message="Invalid form")
+
+    session["user"] = username
     db.execute("INSERT INTO users (username, password) VALUES (:username, :password)", {"username": username, "password": password})
     db.commit()
     return render_template("success.html", nam2 = username)
 
-@app.route("/<string:username>/back_to_search")
-def returns(username):
-    usurp = username
+@app.route("/back_to_search")
+def returns():
+    usurp = session["user"]
     return render_template("success.html", nam2=usurp)
 
-@app.route("/search_for_<string:username>", methods=["POST", "GET"])
-def search(username):
+@app.route("/search", methods=["POST", "GET"])
+def search():
 
     key = request.form.get("key")
 
@@ -74,9 +87,9 @@ def search(username):
     if db.execute(String).rowcount == 0:
         return render_template("error.html", message = "Error 404 Not Found!")
     results = db.execute(String).fetchall()
-    return render_template("results.html", results=results, nam3=username)
+    return render_template("results.html", results=results, nam3=session["user"])
 
-class Class:
+class API:
 
     def __init__(self, isbn):
         self.isbn = isbn
@@ -99,14 +112,14 @@ class Class:
         num = data['books'][0]["average_rating"]
         return num
 
-@app.route("/search_for_<string:username>/review_for_<int:book_id>", methods=["GET", "POST"])
-def review(book_id, username):
+@app.route("/review_for_<int:book_id>", methods=["GET", "POST"])
+def review(book_id):
 
     star = request.form.get("star")
     review = request.form.get("review")
     result = db.execute("SELECT * FROM books WHERE id = :id", {"id": book_id}).fetchone()
 
-    f1 = Class(isbn = result.isbn)
+    f1 = API(isbn = result.isbn)
     numb = f1.apis()
     num = f1.apis1()
 
@@ -114,7 +127,7 @@ def review(book_id, username):
     'rating': None,
     'review': None
     }
-    slide = db.execute("SELECT * FROM users WHERE username = :username", {"username": username}).fetchone()
+    slide = db.execute("SELECT * FROM users WHERE username = :username", {"username": session["user"]}).fetchone()
     user_id = int(slide.id)
 
     if (review == None or star == None) and request.method == "POST":
@@ -127,15 +140,15 @@ def review(book_id, username):
         'rating': star,
         'review': review
         }
-        return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=username, dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
+        return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=session["user"], dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
     elif db.execute("SELECT * FROM reviews WHERE book_id = :book_id AND user_id = :user_id", {"book_id": book_id, "user_id": user_id}).rowcount == 1:
         revie = db.execute("SELECT * FROM reviews WHERE book_id = :book_id AND user_id = :user_id", {"book_id": book_id, "user_id": user_id}).fetchone()
         revs = {
         'rating': revie.rating,
         'review': revie.review
         }
-        return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=username, dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
-    return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=username, dev=None, btn="submit", msg=" ")
+        return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=session["user"], dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
+    return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=session["user"], dev=None, btn="submit", msg=" ")
 
 @app.route("/api/<string:isbn>", methods=["POST", "GET"])
 def api(isbn):
