@@ -8,16 +8,11 @@ import requests, json
 
 app = Flask(__name__)
 
-FLASK_DEBUG = True
-
-FLASK_APP = 'applicset DATA_BASEation.py'
-
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
 app.config["SECRET_KEY"] = "my secret key" #os.getenv("SECRET_KEY")
-
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -81,12 +76,13 @@ def returns():
 def search():
 
     key = request.form.get("key")
+    key = "%" + key + "%"
 
-    String = f"SELECT * FROM books WHERE isbn LIKE '%{key}%' OR title LIKE '%{key}%' OR author LIKE '%{key}%' OR year LIKE '%{key}%'"
+    String = "SELECT * FROM books WHERE isbn LIKE :key OR title LIKE :key OR author LIKE :key OR year LIKE :key"
 
-    if db.execute(String).rowcount == 0:
+    if db.execute(String, {"key": key}).rowcount == 0:
         return render_template("error.html", message = "Error 404 Not Found!")
-    results = db.execute(String).fetchall()
+    results = db.execute(String, {"key": key}).fetchall()
     return render_template("results.html", results=results, nam3=session["user"])
 
 class API:
@@ -101,16 +97,8 @@ class API:
             data = "N//A"
         data = res.json()
         numb = data['books'][0]["work_ratings_count"]
-        return numb
-
-    def apis1(self):
-        sell = self.isbn
-        res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "TcXeSmEygfI5QyL1fMBhw", "isbns": sell})
-        if res.status_code != 200:
-            data = "N//A"
-        data = res.json()
         num = data['books'][0]["average_rating"]
-        return num
+        return [numb, num]
 
 @app.route("/review_for_<int:book_id>", methods=["GET", "POST"])
 def review(book_id):
@@ -120,8 +108,7 @@ def review(book_id):
     result = db.execute("SELECT * FROM books WHERE id = :id", {"id": book_id}).fetchone()
 
     f1 = API(isbn = result.isbn)
-    numb = f1.apis()
-    num = f1.apis1()
+    content = f1.apis()
 
     revs = {
     'rating': None,
@@ -132,23 +119,22 @@ def review(book_id):
 
     if (review == None or star == None) and request.method == "POST":
         return render_template("error.html", message="Oops! you might have forgotten to enter a review and/or rating before submitting.")
-
-    if request.method == "POST":
+    elif request.method == "POST":
         db.execute("INSERT INTO reviews (review, rating, book_id, user_id) VALUES (:review, :star, :book_id, :user_id)", {"book_id": book_id, "user_id": user_id, "review": review, "star": star})
         db.commit()
         revs = {
         'rating': star,
         'review': review
         }
-        return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=session["user"], dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
+        return render_template("review.html", numb=content[0], num=content[1], revs=revs, result=result, nam3=session["user"], dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
     elif db.execute("SELECT * FROM reviews WHERE book_id = :book_id AND user_id = :user_id", {"book_id": book_id, "user_id": user_id}).rowcount == 1:
         revie = db.execute("SELECT * FROM reviews WHERE book_id = :book_id AND user_id = :user_id", {"book_id": book_id, "user_id": user_id}).fetchone()
         revs = {
         'rating': revie.rating,
         'review': revie.review
         }
-        return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=session["user"], dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
-    return render_template("review.html", numb=numb, num=num, revs=revs, result=result, nam3=session["user"], dev=None, btn="submit", msg=" ")
+        return render_template("review.html", numb=content[0], num=content[1], revs=revs, result=result, nam3=session["user"], dev="disabled", btn="button", msg="Sorry! Cannot add more than one review per book!")
+    return render_template("review.html", numb=content[0], num=content[1], revs=revs, result=result, nam3=session["user"], dev=None, btn="submit", msg=" ")
 
 @app.route("/api/<string:isbn>", methods=["POST", "GET"])
 def api(isbn):
@@ -169,11 +155,12 @@ def api(isbn):
         except:
             e = "None"
         average_rating = db.execute("SELECT AVG(rating) FROM reviews WHERE book_id = :book_id", {"book_id": g}).fetchone()
+
         try:
             f = int(average_rating[0])
-
         except:
             f = "None"
+
         grape = ({
         'title': b,
         'author': c,
