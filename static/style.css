@@ -29,53 +29,188 @@ div {
   border-color: white;
 }
 
+/* nav-bar styles start */
+.navigation-bar {
+  background-color: #1d2124;
+  width: 100%;
+  height: 12vh;
+  border-bottom: 5px solid cyan;
+  margin-bottom: 10px;
+}
+
+.nav-title {
+  height: 100%;
+  color: cyan;
+  float: left;
+  padding: 23px;
+  font-weight: bold;
+}
+
+.divider {
+  min-height: 1px;
+  min-width: 80%;
+  background-color: cyan;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.nav-content {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 23px;
+  padding-right: 15px;
+  float: right;
+}
+
+.nav-header {
+  font-weight: bold;
+  color: lightseagreen;
+  padding-left: 10px;
+  margin: auto auto;
+  padding-right: 10px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.dropdown-icon {
+  min-width: 50px;
+  min-height: 50px;
+  border: 2px solid cyan;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: ease 0.3s all;
+}
+
+.item-1, .item-2, .item-3 {
+  width: 37px;
+  height: 5px;
+  border-radius: 5px;
+  margin: 8px auto;
+  background-color: cyan;
+  transition: ease 0.3s all;
+}
+
+.nav-links {
+  color: lightseagreen;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+.nav-links:hover {
+  color: white;
+}
+
+.nav-profile {
+  color: lightblue;
+  font-size: 22px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.dropdown {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  min-width: 160px;
+  margin-left: -160px;
+  background-color: #1d2124;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border: 2px solid cyan;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+}
+
+.dropdown-icon:hover {
+  background-color: cyan;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-icon:hover .item-1,.dropdown-icon:hover .item-2,.dropdown-icon:hover .item-3 {
+  background-color: #1d2124;
+}
+
 body {
-  background-image: url(https://docs.google.com/drawings/d/e/2PACX-1vQsTeFym8H6EjEwq9CvhjCE437rthueQpuIl-nT8Dwn3FBm8f5VNvhNg-Pdb_YCyNw0GtnNGQN6e0lC/pub?w=1440&h=1080);
+  /* background-image: url(https://docs.google.com/drawings/d/e/2PACX-1vQsTeFym8H6EjEwq9CvhjCE437rthueQpuIl-nT8Dwn3FBm8f5VNvhNg-Pdb_YCyNw0GtnNGQN6e0lC/pub?w=1440&h=1080); */
+  background-image: url("./black_bg.jpg");
   background-size: 100% auto;
+  color: white;
   background-repeat: repeat-y;
 }
 
 .card {
-      margin: 0 auto;
-      float: none;
-      margin-bottom: 10px;
-      background-color: #dadce0;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  background-color: #dadce0;
+  color: #1d2124;
+  border: 2px solid #53b9ed;
+}
+
+.card-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+.scroll-card {
+  background-color: #1d2124;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid cyan;
+}
+
+.wrapper {
+  font-size: 30px;
+  padding-right: 10px;
 }
 
 .star0::after {
   content: "\2729 \2729 \2729 \2729 \2729";
-  font-size: 30px;
-  padding-right: 10px;
 }
 
 .star1::after {
   content: "\2605 \2729 \2729 \2729 \2729";
-  font-size: 30px;
-  padding-right: 10px;
 }
 
 .star2::after {
   content: "\2605 \2605 \2729 \2729 \2729";
-  font-size: 30px;
-  padding-right: 10px;
 }
 
 .star3::after {
   content: "\2605 \2605 \2605 \2729 \2729 ";
-  font-size: 30px;
-  padding-right: 10px;
 }
 
 .star4::after {
   content: "\2605 \2605 \2605 \2605 \2729 ";
-  font-size: 30px;
-  padding-right: 10px;
 }
 
 .star5::after {
   content: "\2605 \2605 \2605 \2605 \2605";
-  font-size: 30px;
-  padding-right: 10px;
 }
 
 .size {
@@ -129,6 +264,9 @@ body {
   }
 }
 
+.background-color {
+  background-color: #1d2124;
+}
 
 .bottom-right {
   position: fixed;
@@ -149,12 +287,18 @@ body {
 }
 
 .order {
+  position: relative;
   display: inline-flex;
   flex-wrap: wrap;
+  margin: 15rem auto;
+  margin-bottom: -15rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .order > div {
   margin: 20px;
+  transition: ease 0.5s all;
   background-color: #bcf5f1;
 }
 

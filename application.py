@@ -13,6 +13,7 @@ if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
 app.config["SECRET_KEY"] = "my secret key" #os.getenv("SECRET_KEY")
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 # disable caching
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
