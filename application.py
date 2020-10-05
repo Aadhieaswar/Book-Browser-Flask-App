@@ -66,12 +66,12 @@ def signup():
     session["user"] = username
     db.execute("INSERT INTO users (username, password) VALUES (:username, :password)", {"username": username, "password": password})
     db.commit()
-    return render_template("success.html", nam2 = username)
+    return render_template("success.html", nam2 = username, user_name=username)
 
 @app.route("/back_to_search")
 def returns():
-    usurp = session["user"]
-    return render_template("success.html", nam2=usurp)
+    user_name = session["user"]
+    return render_template("success.html", nam2=user_name, user_name=user_name)
 
 @app.route("/search", methods=["POST", "GET"])
 def search():

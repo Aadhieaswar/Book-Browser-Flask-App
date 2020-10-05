@@ -6,6 +6,29 @@ Books!Books!Books!
 
 {% endblock %}
 
+{% block nav %}
+
+<div class="display-flex">
+  <h3 class="head nav-header">{{ nam3 }}</h3>
+  <div class="dropdown">
+    <div class="dropdown-content">
+      <h3 class="nav-profile">
+        {{ nam3 }}
+      </h3>
+      <div class="divider"></div>
+      <a class="nav-links" href="{{ url_for('logout') }}">LogOut</a>
+      <a class="nav-links" href="{{ url_for('returns', username = nam3) }}">Back To Search</a>
+    </div>
+    <div class="dropdown-icon">
+      <div class="item-1"></div>
+      <div class="item-2"></div>
+      <div class="item-3"></div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block body %}
 
 <h1 class="head"> Login to Books!Books!Books! </h1>

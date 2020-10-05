@@ -12,17 +12,16 @@ Books!Books!Books!
 
 <h4 class="head"> The Best Online Book Review Website</h4>
 
-
-      <form action="{{ url_for('log') }}">
-      <button class="btn btn-primary btn-lg" id="sub" type="submit">Log In</button>
-      </form>
+<form action="{{ url_for('log') }}">
+  <button class="btn btn-primary btn-lg" id="sub" type="submit">Log In</button>
+</form>
 <p> </p>
-      <form action="{{ url_for('sign') }}">
-      <button class="btn btn-primary btn-lg" id="sub" type="submit">Sign Up</button>
-      {% if message %}
-      <div> {{ message }} </div>
-      {% endif %}
-      </form>
+<form action="{{ url_for('sign') }}">
+  <button class="btn btn-primary btn-lg" id="sub" type="submit">Sign Up</button>
+  {% if message %}
+  <div> {{ message }} </div>
+  {% endif %}
+</form>
 
 
 {% endblock %}

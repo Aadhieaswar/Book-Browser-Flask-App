@@ -6,6 +6,29 @@ Success!
 
 {% endblock %}
 
+{% block nav %}
+
+<div class="display-flex">
+  <h3 class="head nav-header">{{ user_name }}</h3>
+  <div class="dropdown">
+    <div class="dropdown-content">
+      <h3 class="nav-profile">
+        {{ nam2 }}
+      </h3>
+      <div class="divider"></div>
+      <a class="nav-links" href="{{ url_for('logout') }}">LogOut</a>
+      <a class="nav-links" href="{{ url_for('returns', username = nam3) }}">Back To Search</a>
+    </div>
+    <div class="dropdown-icon">
+      <div class="item-1"></div>
+      <div class="item-2"></div>
+      <div class="item-3"></div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block body %}
 
 <h1 class="head"> Success! User {{ nam2 }}</h1>
@@ -21,19 +44,14 @@ Success!
   <div class="row">
     <div class="col">
       <form action="{{ url_for('search', username = nam2) }}" method="post">
-      <h4 class="head">Enter key words to search for books(Author, Title, ISBN or Year published):</h4>
-      <input class="form-control" autocomplete="off" type="text" name="key" placeholder="Search">
-      <p></p>
-      <button class="btn btn-primary btn-lg btn-block">Search for Books</button>
+        <h4 class="head">Enter key words to search for books(Author, Title, ISBN or Year published):</h4>
+        <input class="form-control" autocomplete="off" type="text" name="key" placeholder="Search">
+        <p></p>
+        <button class="btn btn-primary btn-lg btn-block">Search for Books</button>
       </form>
     </div>
   </div>
 </div>
-</div>
-<div>
-<form class="bottom-right" action="{{ url_for('logout') }}">
-<button type="submit" class="btn btn-primary">Log Out</button>
-</form>
 </div>
 
 {% endblock %}
