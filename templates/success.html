@@ -31,10 +31,7 @@ Success!
 
 {% block body %}
 
-<h1 class="head"> Success! User {{ nam2 }}</h1>
-
-<h3 class="head"> You Have Logged into Books!Books!Books</h3>
-
+<h3 class="head" style="font-weight: bold;"> You Have Logged into Books!Books!Books</h3>
 <h4 class="head"> The Best Online Book Review Website</h4>
 
 <div class="container my-4">
@@ -44,7 +41,7 @@ Success!
   <div class="row">
     <div class="col">
       <form action="{{ url_for('search', username = nam2) }}" method="post">
-        <h4 class="head">Enter key words to search for books(Author, Title, ISBN or Year published):</h4>
+        <h4 class="head" style="font-weight: bold;">Enter key words to search for books(Author, Title, ISBN or Year published):</h4>
         <input class="form-control" autocomplete="off" type="text" name="key" placeholder="Search">
         <p></p>
         <button class="btn btn-primary btn-lg btn-block">Search for Books</button>

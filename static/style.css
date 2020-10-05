@@ -26,7 +26,8 @@ div {
 
 .bul {
   margin: 0px;
-  border-color: white;
+  border-color: #1d2124;
+  font-weight: bold;
 }
 
 /* nav-bar styles start */
@@ -52,6 +53,10 @@ div {
   background-color: cyan;
   margin: 0 auto;
   padding: 0;
+}
+
+strong {
+  color: cyan;
 }
 
 .nav-content {
@@ -101,6 +106,7 @@ div {
   text-decoration: none;
   padding: 10px;
   display: block;
+  transition: ease 0.3s all;
 }
 
 .nav-links:hover {
@@ -140,19 +146,18 @@ div {
   text-decoration: none;
 }
 
-.dropdown-icon:hover {
+.dropdown:hover .dropdown-icon {
   background-color: cyan;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.dropdown-icon:hover .item-1,.dropdown-icon:hover .item-2,.dropdown-icon:hover .item-3 {
+.dropdown:hover .dropdown-icon .item-1,.dropdown:hover .dropdown-icon .item-2,.dropdown:hover .dropdown-icon .item-3 {
   background-color: #1d2124;
 }
 
 body {
-  /* background-image: url(https://docs.google.com/drawings/d/e/2PACX-1vQsTeFym8H6EjEwq9CvhjCE437rthueQpuIl-nT8Dwn3FBm8f5VNvhNg-Pdb_YCyNw0GtnNGQN6e0lC/pub?w=1440&h=1080); */
   background-image: url("./black_bg.jpg");
   background-size: 100% auto;
   color: white;
@@ -182,11 +187,22 @@ body {
   justify-content: center;
   align-items: center;
   border: 2px solid cyan;
+  opacity: 0.80;
 }
 
 .wrapper {
   font-size: 30px;
   padding-right: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.center-buttons {
+  width: 100%;
+  margin: 0;
+  justify-content: center;
 }
 
 .star0::after {
@@ -284,6 +300,16 @@ body {
   margin-bottom: 2%;
   margin-left: 2.5%;
   position: fixed;
+}
+
+.textarea-review {
+  width: 100%;
+  margin: 0 auto;
+  resize: none;
+}
+
+.review-button {
+  margin: 0 auto;
 }
 
 .order {
