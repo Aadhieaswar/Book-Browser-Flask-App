@@ -9,15 +9,15 @@ Success!
 {% block nav %}
 
 <div class="display-flex">
-  <h3 class="head nav-header">{{ user_name }}</h3>
+  <h3 class="head nav-header">{{ nam2 }}</h3>
   <div class="dropdown">
     <div class="dropdown-content">
       <h3 class="nav-profile">
         {{ nam2 }}
       </h3>
       <div class="divider"></div>
+      <a class="nav-links" href="{{ url_for('returns', username = nam3) }}">Home</a>
       <a class="nav-links" href="{{ url_for('logout') }}">LogOut</a>
-      <a class="nav-links" href="{{ url_for('returns', username = nam3) }}">Back To Search</a>
     </div>
     <div class="dropdown-icon">
       <div class="item-1"></div>
@@ -31,8 +31,8 @@ Success!
 
 {% block body %}
 
-<h3 class="head" style="font-weight: bold;"> You Have Logged into Books!Books!Books</h3>
-<h4 class="head"> The Best Online Book Review Website</h4>
+<h3 class="head color-blue" style="font-weight: bold; margin-bottom: 40px; margin-top: 40px;"> You Have Logged into Books!Books!Books</h3>
+<h4 class="head" style="margin-bottom: 50px;"> The Best Online Book Review Website</h4>
 
 <div class="container my-4">
 

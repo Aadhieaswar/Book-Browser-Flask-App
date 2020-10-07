@@ -1,10 +1,12 @@
 import os
 
-from flask import Flask, session, render_template, request, jsonify
+from flask import Flask, session, render_template, request, jsonify, g
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests, json
+
+from decorators import login_required, logged_in
 
 app = Flask(__name__)
 
@@ -23,15 +25,26 @@ app.config["SESSION_TYPE"] = "filesystem"
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
+# runs before the decorator
+@app.before_request
+def initialize():
+    if "user" not in session:
+        session["user"] = None
+    print(session["user"])
+    return
+
 @app.route("/")
+@logged_in
 def index():
     return render_template("index.html")
 
 @app.route("/signup")
+@logged_in
 def sign():
     return render_template("signup.html")
 
 @app.route("/login")
+@logged_in
 def log():
     return render_template("login.html")
 
@@ -41,18 +54,23 @@ def logout():
     return render_template("index.html")
 
 @app.route("/login/completelogin", methods=["POST", "GET"])
+@logged_in
 def login():
 
     username = request.form.get("username")
     password = request.form.get("password")
 
-    if db.execute("SELECT * FROM users WHERE username = :username AND password = :password", {"username": username, "password": password}).rowcount == 0:
+    exe = db.execute("SELECT * FROM users WHERE username = :username AND password = :password", {"username": username, "password": password}).rowcount
+
+    if exe == 0:
         return render_template("error.html", message="please check your password and/or username")
-    elif db.execute("SELECT * FROM users WHERE username = :username AND password = :password", {"username": username, "password": password}).rowcount == 1:
+    elif exe == 1:
         session["user"] = username
+        print(session["user"])
         return render_template("success.html", nam2 = username)
 
 @app.route("/signup/completesignup", methods=["POST", "GET"])
+@logged_in
 def signup():
 
     username = request.form.get("username")
@@ -68,12 +86,15 @@ def signup():
     db.commit()
     return render_template("success.html", nam2 = username, user_name=username)
 
-@app.route("/back_to_search")
+@app.route("/home")
+@login_required
 def returns():
+    # user_name = session["user"]
     user_name = session["user"]
-    return render_template("success.html", nam2=user_name, user_name=user_name)
+    return render_template("success.html", nam2=user_name)
 
 @app.route("/search", methods=["POST", "GET"])
+@login_required
 def search():
 
     key = request.form.get("key")
@@ -102,6 +123,7 @@ class API:
         return [numb, num]
 
 @app.route("/review_for_<int:book_id>", methods=["GET", "POST"])
+@login_required
 def review(book_id):
 
     star = request.form.get("star")
@@ -174,3 +196,6 @@ def api(isbn):
         resp = jsonify(appl)
         return resp
     return render_template("error.html", message="Error 404 Not Found. The isbn number you entered does not exist in our database")
+
+if __name__ == "__main__":
+    app()

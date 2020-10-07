@@ -8,18 +8,18 @@ Books!Books!Books!
 
 {% block body %}
 
-<h1 class="head"> Welcome to Books!Books!Books! </h1>
+<h1 class="head color-blue" style="font-weight: bold; margin-bottom: 40px;">Welcome <br> to <br> Books!Books!Books!</h1>
 
-<h4 class="head"> The Best Online Book Review Website</h4>
+<h4 class="head" style="margin-bottom: 50px;"> The Best Online Book Review Website</h4>
 
 <form action="{{ url_for('log') }}">
   <button class="btn btn-primary btn-lg" id="sub" type="submit">Log In</button>
 </form>
-<p> </p>
+<br>
 <form action="{{ url_for('sign') }}">
   <button class="btn btn-primary btn-lg" id="sub" type="submit">Sign Up</button>
   {% if message %}
-  <div> {{ message }} </div>
+  <div class="error-message btn-danger"> {{ message }} </div>
   {% endif %}
 </form>
 

@@ -30,6 +30,11 @@ div {
   font-weight: bold;
 }
 
+span {
+  text-decoration: underline;
+  text-decoration-color: #f1f1f1;
+}
+
 /* nav-bar styles start */
 .navigation-bar {
   background-color: #1d2124;
@@ -284,32 +289,10 @@ body {
   background-color: #1d2124;
 }
 
-.bottom-right {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  margin: 0;
-  margin-bottom: 2%;
-  margin-right: 2.5%;
-}
-
-.bottom-left {
-  margin: 0;
-  left: 0;
-  bottom: 0;
-  margin-bottom: 2%;
-  margin-left: 2.5%;
-  position: fixed;
-}
-
 .textarea-review {
   width: 100%;
   margin: 0 auto;
   resize: none;
-}
-
-.review-button {
-  margin: 0 auto;
 }
 
 .order {
@@ -336,4 +319,21 @@ body {
   margin-bottom: 5%;
 }
 
+.color-blue {
+  color: #89cff0;
+}
+
+.error-message {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 40%;
+  min-width: 300px;
+}
 

@@ -16,8 +16,8 @@ Search Results!
         {{ nam3 }}
       </h3>
       <div class="divider"></div>
+      <a class="nav-links" href="{{ url_for('returns', username = nam3) }}">Home</a>
       <a class="nav-links" href="{{ url_for('logout') }}">LogOut</a>
-      <a class="nav-links" href="{{ url_for('returns', username = nam3) }}">Back To Search</a>
     </div>
     <div class="dropdown-icon">
       <div class="item-1"></div>
@@ -31,9 +31,9 @@ Search Results!
 
 {% block body %}
 
-<h1 class="head"> We have found some results for your search!</h1>
+<h1 class="head color-blue" style="font-weight: bold; margin: 40px 0;"> We have found some results for your search!</h1>
 
-<h4 class="head">Choose any book you would link to write a review for</h4>
+<h4 class="head" style="margin-bottom: 40px;">Choose any book you would link to write a review for</h4>
 
 <div class="card scroll-card">
   <div class="order">
