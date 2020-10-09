@@ -30,7 +30,6 @@ db = scoped_session(sessionmaker(bind=engine))
 def initialize():
     if "user" not in session:
         session["user"] = None
-    print(session["user"])
     return
 
 @app.route("/")
